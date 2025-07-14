@@ -81,7 +81,7 @@ Make sure you have these Kexts in your kexts folder:
 
 **config.plist**
 
-After nabbing the Sample.plist from the OpenCorePkg -> Docs folder, moving it to your OC folder and renaming it config.plist, follow the steps in that [Ryzen and Threadripper portion of the guide](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html) with just a few variations:
+After nabbing the Sample.plist from the OpenCorePkg -> Docs folder, moving it to your OC folder and renaming it config.plist, follow the steps in that [Ryzen and Threadripper portion of the guide](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html) with just a few changes:
 
 2. For your AMD patches under the Kernel, the Steam Deck uses **4 cores** and 8 threads. Ignore the threads and just put in 4 cores.
 
