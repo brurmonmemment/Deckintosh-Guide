@@ -56,7 +56,7 @@ You'll want to keep 2 (preferably 3 drivers) that're included in the stock EFI f
 
 1. OpenHFSPlus.efi (HFS+/macOS Extended driver, REQUIRED TO BOOT THE INSTALLER)
 2. OpenRuntime.efi (Runtime for OC, REQURIED)
-3. OpenCanopy.efi (OPTIONAL, For a GUI boot picker)
+3. OpenCanopy.efi (OPTIONAL, If you want a mac-like boot picker follow [this tutorial](https://dortania.github.io/OpenCore-Post-Install/cosmetic/gui.html))
 
 Everything else can and SHOULD be trashed since some of these drivers have tool entries that add clutter to the boot picker.
 
