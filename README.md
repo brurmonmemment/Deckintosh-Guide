@@ -1,4 +1,4 @@
-# OpenCore-Steam-Deck
+# Deckintosh Guide
 
 ![image](https://github.com/user-attachments/assets/7d3877d3-b9c4-4c05-a999-4d8caf38b596)
 
@@ -6,7 +6,7 @@
 
 An OpenCore EFI configuration for the Steam Deck
 
-This is a guide targeted at getting users to run macOS bare metal on their Steam Decks.
+This is a guide targeted at getting users to run macOS natively on their Steam Decks.
 
 Some things to know:
 
@@ -26,6 +26,10 @@ Some things to know:
 
 <hr>
 
+**Prerequisites**
+- A Steam Deck (OLED), becase what else is this guide for?
+- (Optionally) Another computer unless you have 15 hours of free time and can deal with installing Windows, continuing from there, formatting your install device again
+
 **Getting Started**
 
 Firstly, you need to understand how to run macOS on any other PC. Go to the [Dortania OpenCore install guide](https://dortania.github.io/OpenCore-Install-Guide/) and familiarize yourself with it. This is what we will be using.
@@ -34,71 +38,71 @@ For the most part, you will follow the steps in the OpenCore guide, so make sure
 
 As you are following the guide and get to the [Gathering Files](https://dortania.github.io/OpenCore-Install-Guide/ktext.html) portion, you will want to have these files for the Steam Deck:
 
+**ACPI**
 
-**APCI**
+For this, you are going to want to download a tool called [SSDTTime](https://github.com/corpnewt/SSDTTime). Running this tool on the Steam Deck, you are first going to choose option **P** to dump you DSDT. If you are running this tool from another machine, you'll need to have the SSDT/DSDT dumps from your Deck. Please don't try to use your other machine's dumps. That's just flatout stupid.
+Then you are going to select option **3** to make a SSDT-EC.aml. It should be in the results folder. Copy this to your EFI -> ACPI folder, as per the OpenCore guide instructions.
 
-For this, you are going to want to download a tool called [SSDTTime](https://github.com/corpnewt/SSDTTime). Running this tool on the steam deck, you are first going to choose option **P** to dump you DSDT. If you are running this tool from another machine, you will need to get the DSDT from your steam deck select it in the tool. Then you are going to select option **3** to make a SSDT-EC.aml. It should be in the results folder. Copy this to your EFI -> APCI folder, as per the OpenCore guide instructions.
+You will also need the [CPUR](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) SSDT.
 
-You will also need the [SSDT-CPUR](https://github.com/dortania/Getting-Started-With-ACPI/blob/master/extra-files/compiled/SSDT-CPUR.aml) in the ACPI folder.
-
-In the end, you should have two files in the ACPI  folder:
+In the end, you should have two files in the ACPI folder:
 
 1. SSDT-CPUR.aml
 2. SSDT-EC.aml
-   
 
 **Firmware Drivers**
 
-You only need two firmware drivers:
+You'll want to keep 2 (preferably 3 drivers) that're included in the stock EFI folder by default:
 
-1. [HfsPlus.efi](https://github.com/acidanthera/OcBinaryData/blob/master/Drivers/HfsPlus.efi)
-2. OpenRuntime.efi (included in the OpenCore drivers folder already)
+1. OpenHFSPlus.efi (HFS+/macOS Extended driver, REQUIRED TO BOOT THE INSTALLER)
+2. OpenRuntime.efi (Runtime for OC, REQURIED)
+3. OpenCanopy.efi (OPTIONAL, For a GUI boot picker)
 
-Everything other than these two .efi files be trashed. In fact, I recommend that you trash all the extras (there are alot) so the boot menu for OpenCore isnt a confusing mess.
-
+Everything else can and SHOULD be trashed since some of these drivers have tool entries that add clutter to the boot picker.
 
 **Tools and Resources**
 
 Just drag the tools and the resources folders to the trash. Yes I'm serious. We dont need them right now and they can make things much more confusing in the boot menu. Just get rid of them.
 
+**Kexts (USB mapping NEEDS Windows or macOS, read kext 4 for more details)**
 
-**Kexts**
-
-*Note: Kexts with look like regular folders with .kext at the end on Windows and Linux. Just get the folders with the .kext at the end, these are what you want*
+*Note: Kexts with look like regular folders with .kext at the end on Windows and Linux. Just get the folders with the .kext at the end, these are what you want.*
 
 Make sure you have these Kexts in your kexts folder:
 
-1. [Lilu.kext](https://github.com/acidanthera/Lilu/releases)
-2. [VirtualSMC.kext](https://github.com/acidanthera/VirtualSMC/releases) *Only the VirtualSMC.kext is needed, none of the others in the folder*
-3. [GUX-RyzenXHCIFix](https://github.com/RattletraPM/GUX-RyzenXHCIFix/releases/tag/v1.3.0b1-ryzenxhcifix) *This kext is experimental! Make sure you read its readme!*
-4. [USBToolBox.kext](https://github.com/USBToolBox/kext/releases)
-5. For USBMap.kext, you can make your own with the [tool](https://github.com/USBToolBox/tool) with REQUIRES Windows and DOES NOT support Linux, or if you dont have Windows, you can use [this](https://github.com/CodeRunner5235/Opencore-Steam-Deck/blob/main/UTBMap.zip) map which *should* work, but dont be surprised if it stops working
-
-6. [AppleMCEReporterDisabler.kext](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) is only needed for macOS versions newer than *but not including* Big Sur.
+1. [Lilu.kext](https://github.com/acidanthera/Lilu/releases) (macOS will NOT boot without this)
+2. [VirtualSMC.kext](https://github.com/acidanthera/VirtualSMC/releases) *Yank VirtualSMC and SMCBatteryManager, throw away the folder, and then get [SMCAMDProcessor](https://github.com/trulyspinach/SMCAMDProcessor) and [SMCRadeonSensor](https://github.com/ChefKissInc/SMCRadeonSensors)*
+3. [GUX-RyzenXHCIFix](https://github.com/RattletraPM/GUX-RyzenXHCIFix/releases/tag/v1.3.0b1-ryzenxhcifix) So I was actually able to boot without this. If you want it then here you go I guess
+4. [USBToolBox.kext](https://github.com/USBToolBox/kext/releases), which is required when you're using USBMap.kext.
+5. For USBMap.kext, make your own with the [tool](https://github.com/USBToolBox/tool) which REQUIRES Windows and DOES NOT support SteamOS or any other form of Linux, or if you dont have Windows and you're too lazy to boot into a Hiren's BootCD ISO, you can use [this](https://github.com/CodeRunner5235/Opencore-Steam-Deck/blob/main/UTBMap.zip) map which isn't guaranteed to actually work.
+6. [AppleMCEReporterDisabler.kext](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) is only needed for macOS Big Sur and above.
+7. [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C) and [VoodooI2CHID](https://github.com/VoodooI2C/VoodooI2CHID) if you actually want your touchscreen to work. Unless you're some kind of insect that can use the trackpad sideways without messing up easily.
    
 
-**Config.plist**
+**config.plist**
 
-After nabbing the sample.plist from the OpenCorepkg -> docs folder, moving it to your OC folder and renaming it config.plist, follow the steps in that [Ryzen and Threadripper portion of the guide](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html) with just a few variations:
+After nabbing the Sample.plist from the OpenCorePkg -> Docs folder, moving it to your OC folder and renaming it config.plist, follow the steps in that [Ryzen and Threadripper portion of the guide](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html) with just a few variations:
 
-1. You can leave Booter -> Quirks -> ResizeAppleGpuBars as -1 for now.
+2. For your AMD patches under the Kernel, the Steam Deck uses **4 cores** and 8 threads. Ignore the threads and just put in 4 cores.
 
-2. For your AMD patches under the Kernel, the Steam Deck uses **4 cores** and 8 threads, so you will want to use 4 in your AMD patches.
+3. Don't use XhciPortLimit under Kernel -> Quirks, especially if you're running macOS 11.3+ where it just breaks.
 
-3. Under Kernel -> Quirks, we have a USB map so make sure to **disable** the XhciPortLimit
+4. Under Misc -> Boot, don't enable HideAuxiliary. Otherwise, you can't see the macrecovery DMGs and other tools till you press 'Space'. And if you're like me and don't have a USB hub or docking station (good luck), you'll REALLY wanna turn this on.
 
-4. Under Misc -> Security, set SecureBootModel to Disabled to make life easier.
+5. Under Misc -> Security, set SecureBootModel to Disabled to make life easier.
 
-5. Under your NVRAM section in your boot-args, add vsmcgen=1 at the end.
+6. Don't be an idiot and add all the boot arguments (under NVRAM > 7C436110-AB2A-4BBB-A880-FE41995C9F82 > boot-args) you see on the guide.
+   I'd suggest using `-v debug=0x100 keepsyms=1 agdpmod=pikera -radcodec vsmcgen=1`.
 
-6. For PlatformInfo, something like MacBookPro16,3 works fine.
+7. If you want to run modern versions of macOS, I'd suggest MacBookPro16,X
+   If you hate yourself and want to run Tahoe while it's in beta (as of this guide), use MacBookPro16,2.
+   The reason why we're using MacBook Pros is to get the battery indicator to actually show up. Correct me if I'm wrong but MacPro7,1 doesn't have this.
 
-7. Under UEFI -> Output, set DirectGopRendering to True and set the Resolution to 1280x720
-   *Note: If you skip this last part, your screen output will be garbled*
+9. Under UEFI -> Output, set DirectGopRendering to True and set the Resolution to 1280x720 (change the data type to a string)
+   *IMPORTANT: Not enabling DirectGopRendering will result in OpenCore booting in the right orientation and resolution, but after that literally everything is garbled.
+   And not setting the resolution to 1280x720 will immediately show a garbled output.*
 
-
-
-That should do it! Just these changes the the standard OpenCore Ryzen install guide should get you up and running. Have fun!
+And that's it! After you follow the rest of the Install guide for Ryzen, you should be able to boot into an extremely slow macOS install. Have... fun.
 
 <hr>
 
