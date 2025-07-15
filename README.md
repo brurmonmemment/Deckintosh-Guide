@@ -93,9 +93,9 @@ Make sure you have these Kexts in your kexts folder:
 
 **config.plist**
 
-After nabbing the Sample.plist from the OpenCorePkg -> Docs folder, moving it to your OC folder and renaming it config.plist, follow the steps in that [Ryzen and Threadripper portion of the guide](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html) with just a few changes:
+After nabbing the Sample.plist from the OpenCorePkg -> Docs folder, moving it to your OC folder and renaming it to config.plist, follow the steps in the [Ryzen and Threadripper portion of the guide](https://dortania.github.io/OpenCore-Install-Guide/AMD/zen.html) with just a few changes:
 
-2. For your AMD patches under the Kernel, the Steam Deck uses **4 cores** and 8 threads. Ignore the threads and just put in 4 cores.
+2. For the AMD patches under the Kernel, the Steam Deck's CPU has **4 cores** and 8 threads. Ignore the threads and just put in 4 cores.
 
 3. Don't use XhciPortLimit under Kernel -> Quirks, especially if you're running macOS 11.3+ where it just breaks.
 
@@ -111,9 +111,10 @@ After nabbing the Sample.plist from the OpenCorePkg -> Docs folder, moving it to
    The reason why we're using MacBook Pros is to get the battery indicator to actually show up. Correct me if I'm wrong but MacPro7,1 doesn't have this.
 
 9. Under UEFI -> Output, set DirectGopRendering to True and set the Resolution to 1280x720 (change the data type to a string)
-   *IMPORTANT: Not enabling DirectGopRendering will result in OpenCore booting in the right orientation and resolution, but after that literally everything is garbled.
-   And not setting the resolution to 1280x720 will immediately show a garbled output.
-   While you're at it, make sure you also enable AppleEg2Info under UEFI > ProtocolOverrides and set ForceDisplayRotationInEFI under NVRAM > Add > 7C436110-AB2A-4BBB-A880-FE41995C9F82 to 90 (thanks Hack n' Patch). This will only rotate the bootloader though*
+
+   *IMPORTANT: Not enabling DirectGopRendering will result in OpenCore booting in the right orientation and resolution, but after that literally everything is garbled. If you also don't set the resolution to 1280x720, EVERYTHING will appear garbled.*
+
+   *While you're at it, make sure you also enable AppleEg2Info under UEFI > ProtocolOverrides and set ForceDisplayRotationInEFI under NVRAM > Add > 7C436110-AB2A-4BBB-A880-FE41995C9F82 to 90 (thanks Hack n' Patch). This will only rotate the bootloader though*
 
 And that's it! After you follow the rest of the Install guide for Ryzen, you should be able to boot into an extremely slow macOS install. Have... fun.
 
