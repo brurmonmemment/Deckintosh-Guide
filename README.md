@@ -108,6 +108,34 @@ And that's it! After you follow the rest of the Install guide for Ryzen, you sho
 
 <hr>
 
+**BONUS: Installing macOS offline with a single USB port**
+If you're trying to install macOS without a USB hub or docking station, well, you shouldn't be because it's absolutely painful.
+But it's still possible!
+
+Though you will need:
+
+- A USB stick that can hold both the online and offline version of the macOS version you're trying to install. In this case, if you're installing Sequoia, you'll need a stick larger than 16 gigabytes of storage
+- Your Steam Deck to be somewhat charged since macOS won't allow you to install on "low battery" (even if it's 35%)
+- An external keyboard that's wired or has a 2.4 gigahertz dongle.
+- And obviously, an external computer with Python 3 installed.
+
+1. Create 2 partitions on your USB stick. One should be around 1 GB (1024 MB, FAT32) to hold your EFI and online recovery image, and the other one (exFAT) can take up the extra storage.
+2. Download the same *major* version of macOS from macrecovery (in the OpenCorePkg folder > Utilites) and [gibMacOS](https://github.com/corpnewt/gibMacOS). Put the `com.apple.recovery.boot` folder from macrecovery on the 1 GB partition and the files downloaded via gibMacOS on the other partition.
+Also add [UnPlugged.command](https://github.com/corpnewt/UnPlugged) to the exFAT partition.
+3. Edit the UnPlugged.command file on the disk and hardcode the input values since we can't type anything when the command's running.
+Do this by finding the `read -p` lines and create a variable (found at the end of the line) in its place with what you think will fit.
+5. Now, boot into the online recovery image and first enter Disk Utility to see what your exFAT partition is recognized as (for me it's disk3s2), then enter the terminal. Unplug your USB stick (don't worry this won't break macOS) and use your keyboard to just type these 4 commands.
+```
+mkdir /Volumes/UnPlugged
+/sbin/mount_exfat /dev/disk3s2 /Volumes/UnPlugged
+cd /Volumes/UnPlugged
+./UnPlugged.command 
+```
+4. Plug your USB back in and press up on the d-pad 4 times, then press A to re-execute the command. Do this 4 times
+5. You should be greeted with the macOS install screen now. You can continue as normal from this point
+
+<hr>
+
 **Picture Examples**
 
 *OC folder*
@@ -124,8 +152,3 @@ And that's it! After you follow the rest of the Install guide for Ryzen, you sho
 
 *Kexts folder*
 ![image](https://github.com/user-attachments/assets/b0fc4d40-4adf-4b85-aff5-96067341c09a)
-
-
-
-
-
