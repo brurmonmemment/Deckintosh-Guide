@@ -30,6 +30,8 @@ Some things to know:
 - A Steam Deck (OLED), becase what else is this guide for?
 - (Optionally) Another computer unless you have 15 hours of free time and can deal with installing Windows, continuing from there, formatting your install device again
 
+<hr>
+
 **Getting Started**
 
 Firstly, you need to understand how to run macOS on any other PC. Go to the [Dortania OpenCore install guide](https://dortania.github.io/OpenCore-Install-Guide/) and familiarize yourself with it. This is what we will be using.
@@ -37,6 +39,8 @@ Firstly, you need to understand how to run macOS on any other PC. Go to the [Dor
 For the most part, you will follow the steps in the OpenCore guide, so make sure that you read and understand it.
 
 As you are following the guide and get to the [Gathering Files](https://dortania.github.io/OpenCore-Install-Guide/ktext.html) portion, you will want to have these files for the Steam Deck:
+
+<hr>
 
 **ACPI**
 
@@ -50,6 +54,8 @@ In the end, you should have two files in the ACPI folder:
 1. SSDT-CPUR.aml
 2. SSDT-EC.aml
 
+<hr>
+
 **Firmware Drivers**
 
 You'll want to keep 2 (preferably 3 drivers) that're included in the stock EFI folder by default:
@@ -60,9 +66,13 @@ You'll want to keep 2 (preferably 3 drivers) that're included in the stock EFI f
 
 Everything else can and SHOULD be trashed since some of these drivers have tool entries that add clutter to the boot picker.
 
+<hr>
+
 **Tools and Resources**
 
 Just drag the tools and the resources folders to the trash. Yes I'm serious. We dont need them right now and they can make things much more confusing in the boot menu. Just get rid of them.
+
+<hr>
 
 **Kexts (USB mapping NEEDS Windows or macOS, read kext 4 for more details)**
 
