@@ -12,17 +12,18 @@ Some things to know:
 
 1. Barely anything works. Many devices do not have support. This is more of a "Look what I can do!" thing as of right now.
 
-2. THIS CAN EASILY WIPE YOUR STEAMOS INSTALL IF YOU ARE NOT CAREFUL. Part of the macOS install is FORMATTING a storage device OF YOUR CHOOSING. IF YOU CHOOSE THE INTERNAL STORAGE OF THE STEAM DECK, IT WILL BE WIPED.
+2. **Be careful when it comes to actually installing macOS! Part of the process involves formatting a drive of your choosing. Picking the internal drive will EASILY wipe your SteamOS install or whatever OS you currently have.**
 
-3. With #2 being said, you can, in fact, dual boot macOS and steamOS or windows on the same drive with some elbow grease.
+3. With #2 being said, you can, in fact, dual boot macOS and SteamOS/Windows/whatever on the same drive with some elbow grease.
 
-4. I did not make any of the software used. I simply helped get macOS booting with some other devs and people interested. It was a team effort.
+4. This is a an extension of CodeRunner5235's OpenCore on Steam Deck guide (does this even qualify as a guide?).
+Also, I don't own any of the software used. They don't own any of the software.
 
-5. Stuff will be fixed or not depending on if someone takes interest and adds support. PLEASE dont ask when stuff with be supported, I dont know. As support is added, and added in a way the devs of the software are comfortiable with, I will update the guide.
+6. Stuff will be fixed or not depending on if someone takes interest and adds support. PLEASE dont ask when stuff with be supported, I dont know. As support is added, and added in a way the devs of the software are comfortiable with, I will update the guide.
 
-6. PLEASE DO NOT FLOOD THE HACKINTOSH SERVERS FOR SUPPORT REQUESTS. Whether it be discord or others. These are niche devices that barely run macOS. For the love of all thats good and holy, dont pester the volunteers that help others with this meme of a computer. If you must ask, come here to and ask IN THE DISCUSSIONS.
+7. PLEASE DO NOT FLOOD THE HACKINTOSH SERVERS FOR SUPPORT REQUESTS. Whether it be discord or others. These are niche devices that barely run macOS. For the love of all thats good and holy, dont pester the volunteers that help others with this meme of a computer. If you must ask, come here to and ask IN THE DISCUSSIONS.
 
-7. Booting from the SD card slot will not work in most cases (booting an online recovery image *should* work as it is run from memory, not the SD card itself). If you are using an offline image or a full macOS install, you will need to boot from USB or the internal NVME.
+8. Booting from the SD card slot will not work in most cases (booting an online recovery image *should* work as it is run from memory, not the SD card itself). If you are using an offline image or a full macOS install, you will need to boot from USB or the internal NVME.
 
 <hr>
 
