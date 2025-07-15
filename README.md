@@ -77,7 +77,8 @@ Make sure you have these Kexts in your kexts folder:
 5. For USBMap.kext, make your own with the [tool](https://github.com/USBToolBox/tool) which REQUIRES Windows and DOES NOT support SteamOS or any other form of Linux, or if you dont have Windows and you're too lazy to boot into a Hiren's BootCD ISO, you can use [this](https://github.com/CodeRunner5235/Opencore-Steam-Deck/blob/main/UTBMap.zip) map which isn't guaranteed to actually work.
 6. [AppleMCEReporterDisabler.kext](https://github.com/acidanthera/bugtracker/files/3703498/AppleMCEReporterDisabler.kext.zip) is only needed for macOS Big Sur and above.
 7. [VoodooI2C](https://github.com/VoodooI2C/VoodooI2C) and [VoodooI2CHID](https://github.com/VoodooI2C/VoodooI2CHID) if you actually want your touchscreen to work. Unless you're some kind of insect that can use the trackpad sideways without messing up easily.
-   
+
+<hr>
 
 **config.plist**
 
@@ -100,7 +101,8 @@ After nabbing the Sample.plist from the OpenCorePkg -> Docs folder, moving it to
 
 9. Under UEFI -> Output, set DirectGopRendering to True and set the Resolution to 1280x720 (change the data type to a string)
    *IMPORTANT: Not enabling DirectGopRendering will result in OpenCore booting in the right orientation and resolution, but after that literally everything is garbled.
-   And not setting the resolution to 1280x720 will immediately show a garbled output.*
+   And not setting the resolution to 1280x720 will immediately show a garbled output.
+   While you're at it, make sure you also enable AppleEg2Info under UEFI > ProtocolOverrides and set ForceDisplayRotationInEFI under NVRAM > Add > 7C436110-AB2A-4BBB-A880-FE41995C9F82 to 90 (thanks Hack n' Patch). This will only rotate the bootloader though*
 
 And that's it! After you follow the rest of the Install guide for Ryzen, you should be able to boot into an extremely slow macOS install. Have... fun.
 
